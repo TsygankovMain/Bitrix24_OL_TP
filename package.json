@@ -19,6 +19,7 @@
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "deploy:prepare": "npm run prisma:generate && npm run build",
+    "deploy:vibecode": "tsx scripts/deploy-vibecode.ts",
     "start": "node dist/main.js",
     "spike:r1": "tsx spike/r1-webhook/index.ts",
     "spike:r4": "tsx spike/r4-imap-smtp/index.ts",
