@@ -1,0 +1,100 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Portal {
+  id               String    @id @default(uuid()) @db.Uuid
+  b24MemberId      String    @unique @map("b24_member_id")
+  domain           String
+  accessToken      Bytes     @map("access_token")
+  refreshToken     Bytes     @map("refresh_token")
+  tokenExpiresAt   DateTime  @map("token_expires_at") @db.Timestamptz(6)
+  applicationToken Bytes?    @map("application_token")
+  installedAt      DateTime  @default(now()) @map("installed_at") @db.Timestamptz(6)
+  uninstalledAt    DateTime? @map("uninstalled_at") @db.Timestamptz(6)
+
+  mailboxes Mailbox[]
+  botConfig BotConfig?
+
+  @@map("portals")
+}
+
+model Mailbox {
+  id            String    @id @default(uuid()) @db.Uuid
+  portalId      String    @unique @map("portal_id") @db.Uuid
+  email         String
+  imapHost      String    @map("imap_host")
+  imapPort      Int       @map("imap_port")
+  imapUser      String    @map("imap_user")
+  imapPassword  Bytes     @map("imap_password")
+  smtpHost      String    @map("smtp_host")
+  smtpPort      Int       @map("smtp_port")
+  smtpUser      String    @map("smtp_user")
+  smtpPassword  Bytes     @map("smtp_password")
+  useSsl        Boolean   @default(true) @map("use_ssl")
+  olConnectorId String    @map("ol_connector_id")
+  olLineId      Int       @map("ol_line_id")
+  lastSeenUid   Int?      @map("last_seen_uid")
+  enabled       Boolean   @default(true)
+  lastError     String?   @map("last_error")
+  lastPolledAt  DateTime? @map("last_polled_at") @db.Timestamptz(6)
+
+  portal Portal            @relation(fields: [portalId], references: [id], onDelete: Cascade)
+  maps   EmailMessageMap[]
+
+  @@map("mailboxes")
+}
+
+model EmailMessageMap {
+  id             String    @id @default(uuid()) @db.Uuid
+  mailboxId      String    @map("mailbox_id") @db.Uuid
+  emailMessageId String    @map("email_message_id")
+  emailInReplyTo String?   @map("email_in_reply_to")
+  emailSubject   String?   @map("email_subject")
+  clientEmail    String?   @map("client_email")
+  olChatId       BigInt    @map("ol_chat_id")
+  olMessageId    BigInt?   @map("ol_message_id")
+  direction      Direction
+  status         SendStatus @default(pending)
+  error          String?
+  createdAt      DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  sentAt         DateTime? @map("sent_at") @db.Timestamptz(6)
+
+  mailbox Mailbox @relation(fields: [mailboxId], references: [id], onDelete: Cascade)
+
+  @@index([olChatId], map: "idx_email_map_chat")
+  @@index([emailMessageId], map: "idx_email_map_msgid")
+  @@map("email_message_map")
+}
+
+model BotConfig {
+  portalId             String   @id @map("portal_id") @db.Uuid
+  enabled              Boolean  @default(false)
+  botB24Id             Int?     @map("bot_b24_id")
+  vibecodeApiKey       Bytes?   @map("vibecode_api_key")
+  systemPrompt         String   @default("") @map("system_prompt")
+  faq                  Json     @default("[]")
+  attachedOlLines      Int[]    @default([]) @map("attached_ol_lines")
+  handoffAfterMessages Int      @default(3) @map("handoff_after_messages")
+  worktimeOnly         Boolean  @default(false) @map("worktime_only")
+
+  portal Portal @relation(fields: [portalId], references: [id], onDelete: Cascade)
+
+  @@map("bot_config")
+}
+
+enum Direction {
+  inbound
+  outbound
+}
+
+enum SendStatus {
+  pending
+  sent
+  failed
+}

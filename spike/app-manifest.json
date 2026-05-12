@@ -1,0 +1,25 @@
+{
+  "code": "comm_hub",
+  "name": "Центр коммуникаций",
+  "scope": [
+    "imopenlines",
+    "imconnector",
+    "imbot",
+    "im",
+    "crm",
+    "user",
+    "disk",
+    "event",
+    "placement"
+  ],
+  "placement": [
+    {
+      "code": "LEFT_MENU",
+      "handler": "/app#/inbox"
+    },
+    {
+      "code": "SETTINGS",
+      "handler": "/app#/settings"
+    }
+  ]
+}

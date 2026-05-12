@@ -1,0 +1,436 @@
+:root {
+  color: #17202a;
+  background: #f4f6f8;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  border: 0;
+}
+
+.boot-state {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  color: #51606f;
+}
+
+.shell {
+  display: grid;
+  grid-template-rows: 48px 1fr;
+  height: 100vh;
+}
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-bottom: 1px solid #dfe5eb;
+  background: #ffffff;
+  padding: 0 12px;
+}
+
+.nav-link,
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  border-radius: 6px;
+  padding: 0 12px;
+  color: #4d5b66;
+  text-decoration: none;
+  background: transparent;
+}
+
+.nav-link.active,
+.tab.active {
+  background: #e9f5f8;
+  color: #0c6377;
+}
+
+.inbox {
+  display: grid;
+  grid-template-columns: minmax(260px, 340px) 1fr;
+  min-height: 0;
+}
+
+.dialog-list,
+.message-pane,
+.settings-body {
+  min-height: 0;
+  background: #ffffff;
+}
+
+.dialog-list {
+  border-right: 1px solid #dfe5eb;
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 52px;
+  border-bottom: 1px solid #edf1f4;
+  padding: 0 14px;
+}
+
+.panel-head h1,
+.panel-head h2 {
+  overflow: hidden;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.icon-button,
+.primary-icon-button,
+.danger-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 34px;
+  border-radius: 6px;
+  padding: 0 10px;
+}
+
+.icon-button {
+  width: 34px;
+  background: #eef2f5;
+  color: #34414d;
+}
+
+.primary-icon-button {
+  background: #197e63;
+  color: #ffffff;
+}
+
+.danger-button {
+  background: #fcebea;
+  color: #a33a2a;
+}
+
+.dialog-items {
+  height: calc(100vh - 100px);
+  overflow: auto;
+}
+
+.dialog-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  width: 100%;
+  min-height: 72px;
+  border-bottom: 1px solid #edf1f4;
+  padding: 10px 14px;
+  text-align: left;
+  background: #ffffff;
+  color: #17202a;
+}
+
+.dialog-item.active {
+  background: #f0f7f3;
+  box-shadow: inset 3px 0 0 #197e63;
+}
+
+.dialog-title {
+  overflow: hidden;
+  font-weight: 620;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dialog-time {
+  color: #7a8792;
+  font-size: 12px;
+}
+
+.dialog-preview {
+  grid-column: 1 / -1;
+  overflow: hidden;
+  color: #687782;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.conversation {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  min-width: 0;
+  min-height: 0;
+}
+
+.messages {
+  display: flex;
+  height: calc(100vh - 154px);
+  flex-direction: column;
+  gap: 10px;
+  overflow: auto;
+  padding: 18px;
+  background: #f7f9fb;
+}
+
+.message {
+  max-width: min(680px, 78%);
+  border: 1px solid #dfe5eb;
+  border-radius: 8px;
+  padding: 10px 12px 8px;
+  background: #ffffff;
+}
+
+.message.outbound {
+  align-self: flex-end;
+  border-color: #c7e5d9;
+  background: #eef8f4;
+}
+
+.message-text {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.message time {
+  display: block;
+  margin-top: 6px;
+  color: #7a8792;
+  font-size: 12px;
+  text-align: right;
+}
+
+.message-files {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.message-files span {
+  border-radius: 5px;
+  background: #eef2f5;
+  padding: 4px 6px;
+  font-size: 12px;
+}
+
+.composer {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  gap: 10px;
+  border-top: 1px solid #dfe5eb;
+  background: #ffffff;
+  padding: 12px;
+}
+
+.composer textarea,
+.settings-form textarea,
+.settings-form input,
+.settings-form select {
+  width: 100%;
+  border: 1px solid #cfd8df;
+  border-radius: 6px;
+  padding: 9px 10px;
+  background: #ffffff;
+  color: #17202a;
+}
+
+.composer textarea {
+  min-height: 42px;
+  max-height: 130px;
+  resize: vertical;
+}
+
+.settings {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  min-height: 0;
+}
+
+.settings-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-right: 1px solid #dfe5eb;
+  background: #ffffff;
+  padding: 12px;
+}
+
+.settings-body {
+  overflow: auto;
+  padding: 18px;
+}
+
+.settings-form {
+  max-width: 920px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.settings-form label {
+  display: grid;
+  gap: 6px;
+  color: #51606f;
+  font-size: 13px;
+}
+
+.check-row {
+  display: flex !important;
+  grid-template-columns: none !important;
+  align-items: center;
+  gap: 8px !important;
+  margin-top: 14px;
+}
+
+.check-row.compact {
+  margin-top: 0;
+}
+
+.check-row input {
+  width: auto;
+}
+
+.form-actions,
+.faq-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.large-textarea {
+  min-height: 130px;
+}
+
+.line-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 14px 0;
+}
+
+.faq-list {
+  display: grid;
+  gap: 10px;
+}
+
+.faq-row {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) minmax(240px, 2fr) 34px;
+  gap: 10px;
+  align-items: start;
+}
+
+.faq-row textarea {
+  min-height: 70px;
+}
+
+.status-line {
+  margin-bottom: 14px;
+  border-left: 3px solid #197e63;
+  background: #eef8f4;
+  padding: 9px 12px;
+  color: #155d4b;
+}
+
+.error-text {
+  color: #a33a2a;
+}
+
+.empty-state {
+  padding: 18px;
+  color: #7a8792;
+}
+
+.about-pane dl {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 12px;
+  max-width: 620px;
+}
+
+.about-pane dt {
+  color: #687782;
+}
+
+.about-pane dd {
+  margin: 0;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 760px) {
+  .inbox,
+  .settings {
+    grid-template-columns: 1fr;
+  }
+
+  .dialog-list {
+    max-height: 40vh;
+    border-right: 0;
+    border-bottom: 1px solid #dfe5eb;
+  }
+
+  .dialog-items,
+  .messages {
+    height: auto;
+    max-height: 40vh;
+  }
+
+  .settings-tabs {
+    flex-direction: row;
+    overflow: auto;
+    border-right: 0;
+    border-bottom: 1px solid #dfe5eb;
+  }
+
+  .form-grid,
+  .faq-row,
+  .composer {
+    grid-template-columns: 1fr;
+  }
+
+  .message {
+    max-width: 100%;
+  }
+}
