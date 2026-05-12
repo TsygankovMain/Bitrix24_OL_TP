@@ -40,7 +40,7 @@ const response = await fetch(`${baseUrl}/v1/infra/servers/${serverId}/deploy`, {
   body: JSON.stringify({
     source: { url: sourceUrl },
     port: 3000,
-    preStart: 'cd /opt/app && for dir in */; do [ -f "$dir/package.json" ] && (mv "$dir"/* . && rmdir "$dir") ; done && npm install && npm run build',
+    preStart: 'cd /opt/app && for dir in */; do [ -f "$dir/package.json" ] && (mv "$dir"/* "$dir"/.* . 2>/dev/null; rm -rf "$dir") ; done && npm install && npm run build',
     start: 'npm run start',
     env,
   }),
