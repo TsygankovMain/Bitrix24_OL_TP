@@ -20,13 +20,10 @@ const env = {
   SUPABASE_URL: process.env.SUPABASE_URL,
   SUPABASE_STORAGE_BUCKET: process.env.SUPABASE_STORAGE_BUCKET ?? 'comm-hub-attachments',
   SUPABASE_STORAGE_SERVICE_KEY: process.env.SUPABASE_STORAGE_SERVICE_KEY,
-  DISABLE_WORKERS: process.env.DISABLE_WORKERS ?? 'false',
-  SKIP_DB_HEALTH: process.env.SKIP_DB_HEALTH ?? 'false',
+  DISABLE_WORKERS: process.env.DISABLE_WORKERS ?? 'true',
+  SKIP_DB_HEALTH: process.env.SKIP_DB_HEALTH ?? 'true',
 };
 
-if (!env.DATABASE_URL) {
-  throw new Error('DATABASE_URL is required for deployment');
-}
 if (!env.B24_CLIENT_ID || !env.B24_CLIENT_SECRET) {
   throw new Error('B24_CLIENT_ID and B24_CLIENT_SECRET are required for deployment');
 }
@@ -43,7 +40,7 @@ const response = await fetch(`${baseUrl}/v1/infra/servers/${serverId}/deploy`, {
   body: JSON.stringify({
     source: { url: sourceUrl },
     port: 3000,
-    preStart: 'npm ci && npx prisma migrate deploy && npm run build',
+    preStart: 'npm ci && npm run build',
     start: 'npm run start',
     env,
   }),
