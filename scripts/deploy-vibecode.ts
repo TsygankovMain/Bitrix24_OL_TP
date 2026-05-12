@@ -1,7 +1,7 @@
 const apiKey = process.env.VIBECODE_API_KEY;
 const baseUrl = process.env.VIBECODE_BASE_URL ?? 'https://vibecode.bitrix24.tech';
 const serverId = process.env.VIBECODE_SERVER_ID;
-const sourceUrl = process.env.VIBECODE_SOURCE_URL ?? 'https://github.com/TsygankovMain/Bitrix24_OL_TP.git';
+const sourceUrl = process.env.VIBECODE_SOURCE_URL ?? 'https://github.com/TsygankovMain/Bitrix24_OL_TP/archive/main.tar.gz';
 
 if (!apiKey || !serverId) {
   throw new Error('VIBECODE_API_KEY and VIBECODE_SERVER_ID are required');
