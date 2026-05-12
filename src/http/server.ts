@@ -43,6 +43,10 @@ export async function buildServer() {
     },
   });
 
+  app.get('/', async (request, reply) => {
+    return { ok: true };
+  });
+
   app.get('/healthz', async () => {
     if (!config.SKIP_DB_HEALTH) {
       await prisma.$queryRaw`SELECT 1`;
