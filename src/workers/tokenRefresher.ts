@@ -1,4 +1,4 @@
-import type { PrismaClient } from '@prisma/client';
+import type { AppStore } from '../vendor/supabase.js';
 import type { AppConfig } from '../config.js';
 import { decryptSecret, encryptSecret } from '../crypto.js';
 import { logger } from '../logger.js';
@@ -8,7 +8,7 @@ export class TokenRefresher {
   private timer: NodeJS.Timeout | null = null;
 
   constructor(
-    private readonly prisma: PrismaClient,
+    private readonly prisma: AppStore,
     private readonly config: AppConfig,
   ) {}
 

@@ -18,7 +18,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,json,md,css}\"",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
-    "deploy:prepare": "npm run prisma:generate && npm run build",
+    "deploy:prepare": "npm run build",
     "deploy:vibecode": "tsx scripts/deploy-vibecode.ts",
     "start": "node dist/main.js",
     "spike:r1": "tsx spike/r1-webhook/index.ts",

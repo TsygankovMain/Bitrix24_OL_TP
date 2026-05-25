@@ -1,4 +1,4 @@
-import type { PrismaClient } from '@prisma/client';
+import type { AppStore } from '../../vendor/supabase.js';
 import { encryptSecret } from '../../crypto.js';
 import type { JsonObject } from '../../types.js';
 
@@ -24,7 +24,7 @@ export interface InstallFlowConfig {
 
 export class InstallFlow {
   constructor(
-    private readonly prisma: PrismaClient,
+    private readonly prisma: AppStore,
     private readonly config: InstallFlowConfig,
   ) {}
 

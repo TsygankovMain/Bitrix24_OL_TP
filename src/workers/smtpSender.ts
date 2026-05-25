@@ -1,4 +1,4 @@
-import type { PrismaClient } from '@prisma/client';
+import type { AppStore } from '../vendor/supabase.js';
 import nodemailer from 'nodemailer';
 import PQueue from 'p-queue';
 
@@ -22,7 +22,7 @@ export interface SmtpEnvelope {
 export class SmtpSender {
   private readonly queue = new PQueue({ concurrency: 2 });
 
-  constructor(private readonly prisma: PrismaClient) {}
+  constructor(private readonly prisma: AppStore) {}
 
   async enqueue(envelope: SmtpEnvelope): Promise<void> {
     await this.queue.add(async () => {

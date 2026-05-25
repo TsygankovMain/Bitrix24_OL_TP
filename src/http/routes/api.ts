@@ -231,12 +231,13 @@ export function apiRoutes(app: FastifyInstance): void {
       create: {
         portalId: context.portalId,
         enabled: body.enabled,
+        botB24Id: null,
         systemPrompt: body.systemPrompt,
         faq: body.faq as JsonObject[],
         attachedOlLines: body.attachedOlLines,
         handoffAfterMessages: body.handoffAfterMessages,
         worktimeOnly: body.worktimeOnly,
-        vibecodeApiKey: encryptedKey,
+        vibecodeApiKey: encryptedKey ?? null,
       },
       update: {
         enabled: body.enabled,

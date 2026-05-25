@@ -4,6 +4,7 @@ import { getConfig } from '../../config.js';
 import { decryptSecret } from '../../crypto.js';
 import { prisma } from '../../vendor/supabase.js';
 import { SmtpSender } from '../../workers/smtpSender.js';
+import type { EmailMessageMapRecord, MailboxRecord } from '../../vendor/supabase.js';
 
 const connectorWebhookSchema = z.object({
   event: z.string().optional(),
@@ -33,11 +34,11 @@ export function webhookRoutes(app: FastifyInstance): void {
       return { ok: true, ignored: true };
     }
 
-    const messageMap = await prisma.emailMessageMap.findFirst({
+    const messageMap = (await prisma.emailMessageMap.findFirst({
       where: { olChatId: BigInt(chatId), direction: 'inbound' },
       orderBy: { createdAt: 'desc' },
       include: { mailbox: true },
-    });
+    })) as (EmailMessageMapRecord & { mailbox: MailboxRecord }) | null;
     if (!messageMap?.clientEmail) {
       return { ok: true, ignored: true };
     }

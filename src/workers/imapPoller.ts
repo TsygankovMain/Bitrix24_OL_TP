@@ -1,4 +1,4 @@
-import type { PrismaClient } from '@prisma/client';
+import type { AppStore, MailboxRecord, PortalRecord } from '../vendor/supabase.js';
 import { ImapFlow } from 'imapflow';
 import type { AppConfig } from '../config.js';
 import { decryptSecret } from '../crypto.js';
@@ -17,7 +17,7 @@ export class ImapPoller {
   private timer: NodeJS.Timeout | null = null;
 
   constructor(
-    private readonly prisma: PrismaClient,
+    private readonly prisma: AppStore,
     private readonly config: AppConfig,
   ) {}
 
@@ -53,10 +53,10 @@ export class ImapPoller {
   }
 
   async pollMailbox(mailboxId: string): Promise<void> {
-    const mailbox = await this.prisma.mailbox.findUniqueOrThrow({
+    const mailbox = (await this.prisma.mailbox.findUniqueOrThrow({
       where: { id: mailboxId },
       include: { portal: true },
-    });
+    })) as MailboxRecord & { portal: PortalRecord };
     const imapPassword = await decryptSecret(
       mailbox.imapPassword,
       this.config.MASTER_ENCRYPTION_KEY_BASE64,

@@ -48,12 +48,10 @@ export async function buildServer() {
   });
 
   app.get('/healthz', async () => {
-    if (!config.SKIP_DB_HEALTH) {
-      await prisma.$queryRaw`SELECT 1`;
-    }
+    await prisma.$queryRaw`SELECT 1`;
     return {
       status: 'ok',
-      db: config.SKIP_DB_HEALTH ? 'skipped' : 'up',
+      storage: 'in-memory',
       time: new Date().toISOString(),
     };
   });
@@ -66,7 +64,6 @@ export async function buildServer() {
   await app.register(fastifyStatic, {
     root: webDist,
     prefix: '/app/',
-    decorateReply: false,
   });
 
   app.setNotFoundHandler((request, reply) => {

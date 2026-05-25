@@ -1,9 +1,9 @@
-import type { PrismaClient } from '@prisma/client';
+import type { AppStore } from '../../vendor/supabase.js';
 import type { B24Port } from '../../ports/B24Port.js';
 import { setEmailConnectorActive } from '../connector/ConnectorRegistration.js';
 
 export class UninstallFlow {
-  constructor(private readonly prisma: PrismaClient) {}
+  constructor(private readonly prisma: AppStore) {}
 
   async uninstall(portalId: string, b24?: B24Port): Promise<void> {
     const mailbox = await this.prisma.mailbox.findUnique({ where: { portalId } });

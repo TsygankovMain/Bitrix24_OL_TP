@@ -4,7 +4,6 @@ const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
   PORT: z.coerce.number().int().positive().default(3000),
   APP_BASE_URL: z.string().url().default('http://localhost:3000'),
-  DATABASE_URL: z.string().min(1).optional(),
   B24_CLIENT_ID: z.string().min(1),
   B24_CLIENT_SECRET: z.string().min(1),
   JWT_SECRET: z.string().min(16),
@@ -18,10 +17,6 @@ const envSchema = z.object({
   SUPABASE_STORAGE_BUCKET: z.string().default('comm-hub-attachments'),
   SUPABASE_STORAGE_SERVICE_KEY: z.string().optional(),
   DISABLE_WORKERS: z
-    .enum(['true', 'false'])
-    .default('false')
-    .transform((value) => value === 'true'),
-  SKIP_DB_HEALTH: z
     .enum(['true', 'false'])
     .default('false')
     .transform((value) => value === 'true'),

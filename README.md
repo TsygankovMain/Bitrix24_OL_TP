@@ -10,9 +10,8 @@ MVP для проверки гипотезы: единый inbox для Откр
 
 ```bash
 npm install
-npm run prisma:generate
 npm run test
 npm run build
 ```
 
-Для реального запуска нужны значения из `.env.example`, тестовый портал Битрикс24, VibeCode key и внешний Postgres.
+Для реального запуска нужны значения из `.env.example`, тестовый портал Битрикс24 и VibeCode key.
