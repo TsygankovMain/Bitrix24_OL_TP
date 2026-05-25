@@ -1,0 +1,152 @@
+{
+  "layout": {},
+  "page": {
+    "index": {
+      "seo": {
+        "title": "[playground] Application Testing"
+      },
+      "menu": {
+        "main": "Open"
+      },
+      "message": {
+        "title": "Hello!",
+        "line1": "Let's test the application's operation in Bitrix24."
+      },
+      "action": {
+        "telemetry_test": "Telemetry Test"
+      }
+    },
+    "telemetry-test": {
+      "seo": {
+        "title": "Telemetry Test"
+      },
+      "title": "Telemetry Test",
+      "description": "Visual verification of all telemetry channels: backend events, frontend events, Bitrix24 API calls.",
+      "section": {
+        "backend": "Backend Events (PHP)",
+        "backend_desc": "Press the button — PHP backend will send 7 different events to OTel Collector.",
+        "frontend": "Frontend Events",
+        "frontend_desc": "Each button / field / form sends the corresponding event via useTelemetry.",
+        "b24api": "Bitrix24 API Calls",
+        "b24api_desc": "Direct JS SDK calls with b24_api_call tracking."
+      },
+      "action": {
+        "run_backend": "Fire backend events",
+        "button_click": "ui_button_click",
+        "form_submit": "ui_form_submit",
+        "error_track": "ui_error (soft)",
+        "b24_user": "user.current",
+        "b24_status": "crm.status.list",
+        "b24_placement": "placement.info",
+        "back": "\u2190 Back"
+      },
+      "label": {
+        "select": "Select (ui_select_change)",
+        "form_field": "Form field"
+      },
+      "status": {
+        "idle": "Idle",
+        "ok": "\u2713 Sent",
+        "error": "\u2717 Error",
+        "result": "Result"
+      }
+    },
+    "install": {
+      "seo": {
+        "title": "Application Installation"
+      },
+      "ui": {
+        "title": "Application Installation"
+      },
+      "step": {
+        "init": {
+          "caption": "Please wait a moment..."
+        },
+        "demo": {
+          "caption": "Examples..."
+        },
+        "events": {
+          "caption": "Events..."
+        },
+        "placement": {
+          "caption": "Widgets..."
+        },
+        "userFields": {
+          "caption": "Uf..."
+        },
+        "crm": {
+          "caption": "CRM..."
+        },
+        "serverSide": {
+          "caption": "Server-side scripts..."
+        },
+        "finish": {
+          "caption": "Completion"
+        }
+      }
+    },
+    "app-options": {
+      "seo": {
+        "title": "Application Settings",
+        "description": "Example of working with application settings."
+      },
+      "actions": {
+        "save": "Save",
+        "cancel": "Cancel"
+      },
+      "error": {
+        "title": "Error",
+        "notAdmin": "Only an administrator can edit the application settings."
+      },
+      "option": {
+        "history": {
+          "title": "Operation history",
+          "alert": "Demonstration of working with the property. Similarly, any application properties can be configured.",
+          "property_1": "How many days to keep history",
+          "property_2": "Event title",
+          "property_bool": "Upward trend?"
+        },
+        "present": {
+          "title": "Event Log",
+          "alert": "Every employee login is displayed in the Event Log. You can always check who, when, and from which IP addresses logged into Bitrix24."
+        }
+      }
+    }
+  },
+  "uf": {
+    "demo": {
+      "alert": {
+        "title": "Demonstration of working with the property.",
+        "description": "Similarly, any application properties can be configured"
+      },
+      "field": {
+        "label": "Example field",
+        "description": "Changing the value causes the chart to be rebuilt",
+        "hint": "Trend"
+      },
+      "action": {
+        "settings": "Open settings"
+      }
+    }
+  },
+  "placement": {
+    "crm_deal_detail_tab": {
+      "seo": {
+        "title": "Embedding in the deal card",
+        "description": "Demonstration."
+      },
+      "action": "Shuffle"
+    }
+  },
+  "components": {
+    "backendStatus": {
+      "title": "Backend Status",
+      "description": {
+        "healthy": "Backend is healthy ({msg})",
+        "checking": "Checking backend health...",
+        "error": "Internal connection error"
+      },
+      "action": "Update status"
+    }
+  }
+}
